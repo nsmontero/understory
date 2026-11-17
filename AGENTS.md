@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- All park-specific content (name, colours, route, stops, scripts, audio paths) lives in one JSON per park in src/content/; components must stay park-agnostic so new parks are added by file only.
+- Narration tries /public/audio/<stop-id>-<lang>.mp3 and falls back to browser speech; keep that fallback so the demo always talks.
