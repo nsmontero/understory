@@ -1,6 +1,10 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
-import type { LatLng, Park } from "@/content/types";
+import { renderToStaticMarkup } from "react-dom/server";
+import { Bike, Coffee, Droplet, Toilet } from "lucide-react";
+import type { AmenityType, LatLng, Park } from "@/content/types";
+
+const AMENITY_ICON: Record<AmenityType, typeof Bike> = { washroom: Toilet, water: Droplet, food: Coffee, "bike-parking": Bike };
 
 interface Props {
   park: Park;
@@ -9,13 +13,16 @@ interface Props {
   nextIndex: number;
   follow: boolean;
   onStopClick: (index: number) => void;
+  showAmenities: boolean;
+  amenityLabel: (t: AmenityType) => string;
 }
 
-export default function TourMap({ park, position, completed, nextIndex, follow, onStopClick }: Props) {
+export default function TourMap({ park, position, completed, nextIndex, follow, onStopClick, showAmenities, amenityLabel }: Props) {
   const el = useRef<HTMLDivElement>(null);
   const map = useRef<L.Map | null>(null);
   const pins = useRef<L.Marker[]>([]);
   const rider = useRef<L.Marker | null>(null);
+  const amenityLayer = useRef<L.LayerGroup | null>(null);
   const clickRef = useRef(onStopClick);
   clickRef.current = onStopClick;
 
@@ -54,6 +61,29 @@ export default function TourMap({ park, position, completed, nextIndex, follow, 
       p.setIcon(L.divIcon({ className: "", html: `<div class="stop-pin ${cls}">${i + 1}</div>`, iconSize: [40, 40], iconAnchor: [20, 20] }));
     });
   }, [completed, nextIndex, park]);
+
+  // Services layer: quiet, non-triggering pins; tap shows the name only.
+  useEffect(() => {
+    const m = map.current;
+    amenityLayer.current?.remove();
+    amenityLayer.current = null;
+    if (!m || !showAmenities || !park.amenities?.length) return;
+    const g = L.layerGroup(
+      park.amenities.map((a) => {
+        const Icon = AMENITY_ICON[a.type];
+        const label = a.name ? `${amenityLabel(a.type)} · ${a.name}` : amenityLabel(a.type);
+        return L.marker(a.coords, {
+          icon: L.divIcon({ className: "", html: `<div class="amenity-pin">${renderToStaticMarkup(<Icon aria-hidden />)}</div>`, iconSize: [28, 28], iconAnchor: [14, 14] }),
+          title: label,
+          zIndexOffset: -500,
+        }).bindTooltip(label, { direction: "top", offset: [0, -14] });
+      }),
+    ).addTo(m);
+    amenityLayer.current = g;
+    return () => {
+      g.remove();
+    };
+  }, [showAmenities, park, amenityLabel]);
 
   useEffect(() => {
     const m = map.current;

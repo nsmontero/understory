@@ -38,6 +38,11 @@ const en = {
   dirs: ["north", "northeast", "east", "southeast", "south", "southwest", "west", "northwest"],
   allStops: "Stops",
   close: "Close",
+  pauseRide: "Pause ride",
+  resumeRide: "Resume ride",
+  ridePaused: "Ride paused",
+  amenities: "Services",
+  amenityNames: { washroom: "Washroom", water: "Water fountain", food: "Food & drink", "bike-parking": "Bike parking" },
 };
 
 const fr: typeof en = {
@@ -78,6 +83,11 @@ const fr: typeof en = {
   dirs: ["nord", "nord-est", "est", "sud-est", "sud", "sud-ouest", "ouest", "nord-ouest"],
   allStops: "Arrêts",
   close: "Fermer",
+  pauseRide: "Pause",
+  resumeRide: "Reprendre",
+  ridePaused: "Balade en pause",
+  amenities: "Services",
+  amenityNames: { washroom: "Toilettes", water: "Fontaine d’eau", food: "Restauration", "bike-parking": "Stationnement vélo" },
 };
 
 export const strings: Record<Lang, typeof en> = { en, fr };

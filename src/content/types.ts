@@ -17,6 +17,13 @@ export interface Partner {
   description: Localized;
 }
 
+export type AmenityType = "washroom" | "water" | "food" | "bike-parking";
+export interface Amenity {
+  type: AmenityType;
+  coords: LatLng;
+  name?: string;
+}
+
 export interface Park {
   id: string;
   name: Localized;
@@ -29,4 +36,6 @@ export interface Park {
   route: LatLng[];
   partners: Partner[];
   stops: Stop[];
+  /** Optional rider services shown on a toggleable map layer. */
+  amenities?: Amenity[];
 }

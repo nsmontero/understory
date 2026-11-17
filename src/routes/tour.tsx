@@ -1,9 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ClientOnly } from "@tanstack/react-router";
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, MapPin, Pause, Play } from "lucide-react";
 import { activePark } from "@/content/parks";
-import type { LatLng } from "@/content/types";
+import type { AmenityType, LatLng } from "@/content/types";
 import { useTour } from "@/lib/tour";
 import { alongRoute, cumulative, findStopInRange, pointAt } from "@/lib/geo";
 import { narrator, playChime, unlockAudio } from "@/lib/narration";
@@ -42,6 +42,8 @@ function TourPage() {
   const played = useRef(new Set<string>());
   const along = useRef(0);
   const previewNext = useRef(0);
+  const [ridePaused, setRidePaused] = useState(false);
+  const [showAmenities, setShowAmenities] = useState(false);
 
   const trigger = useCallback(
     (index: number) => {
@@ -82,7 +84,7 @@ function TourPage() {
   // Preview mode: glide along the route, stopping at each stop in order.
   const sheetOpen = open !== null;
   useEffect(() => {
-    if (mode !== "preview" || sheetOpen) return;
+    if (mode !== "preview" || sheetOpen || ridePaused) return;
     if (previewNext.current >= park.stops.length) return;
     let raf = 0;
     let last = performance.now();
@@ -102,7 +104,7 @@ function TourPage() {
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [mode, sheetOpen, park, cum, stopAlong, trigger]);
+  }, [mode, sheetOpen, ridePaused, park, cum, stopAlong, trigger]);
 
   const goNext = useCallback(() => {
     if (!open) return;
@@ -116,9 +118,12 @@ function TourPage() {
 
   const closeSheet = useCallback(() => {
     if (open) markCompleted(park.stops[open.index]!.id);
+    narrator.stop();
     setCountdown(null);
     setOpen(null);
-  }, [open, park, markCompleted]);
+    // Closing a stop in preview pauses the simulated ride until the rider resumes it.
+    if (mode === "preview") setRidePaused(true);
+  }, [open, park, markCompleted, mode]);
 
   // In preview, ride on automatically once a stop finishes.
   const nar = useSyncExternalStore(narrator.subscribe, narrator.getState, narrator.getState);
@@ -142,6 +147,7 @@ function TourPage() {
   const switchMode = (m: Mode) => {
     unlockAudio();
     setNotice(null);
+    setRidePaused(false);
     if (m === "preview") {
       // Resume from the first stop not yet played.
       const idx = park.stops.findIndex((s) => !played.current.has(s.id));
@@ -150,6 +156,8 @@ function TourPage() {
     }
     setMode(m);
   };
+
+  const amenityLabel = useCallback((a: AmenityType) => t.amenityNames[a], [t]);
 
   const nextIndex = park.stops.findIndex((s) => !completed.includes(s.id));
 
@@ -164,6 +172,8 @@ function TourPage() {
             nextIndex={nextIndex}
             follow={mode === "preview" || position !== null}
             onStopClick={(i) => setOpen({ index: i, autoplay: false })}
+            showAmenities={showAmenities}
+            amenityLabel={amenityLabel}
           />
         </Suspense>
       </ClientOnly>
@@ -199,9 +209,33 @@ function TourPage() {
 
       {!open && (
         <div className="absolute inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[900] rounded-2xl bg-background p-4 text-foreground shadow-lift">
-          <p className="text-sm font-bold uppercase tracking-widest text-primary">
-            {mode === "preview" ? t.previewOn : position ? t.liveLocation : t.locating}
-          </p>
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-sm font-bold uppercase tracking-widest text-primary">
+              {mode === "preview" ? (ridePaused ? t.ridePaused : t.previewOn) : position ? t.liveLocation : t.locating}
+            </p>
+            <div className="flex gap-2">
+              {park.amenities?.length ? (
+                <button
+                  onClick={() => setShowAmenities((v) => !v)}
+                  aria-pressed={showAmenities}
+                  className={`flex h-11 items-center gap-1.5 rounded-full px-3 text-sm font-bold ${showAmenities ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground"}`}
+                >
+                  <MapPin className="size-4" aria-hidden />
+                  {t.amenities}
+                </button>
+              ) : null}
+              {mode === "preview" && previewNext.current < park.stops.length && (
+                <button
+                  onClick={() => setRidePaused((v) => !v)}
+                  aria-label={ridePaused ? t.resumeRide : t.pauseRide}
+                  className="flex h-11 items-center gap-1.5 rounded-full bg-accent px-3 text-sm font-bold text-accent-foreground"
+                >
+                  {ridePaused ? <Play className="size-4" aria-hidden /> : <Pause className="size-4" aria-hidden />}
+                  {ridePaused ? t.resumeRide : t.pauseRide}
+                </button>
+              )}
+            </div>
+          </div>
           <div className="mt-2 flex gap-1.5" aria-label={`${completed.length} / ${park.stops.length}`}>
             {park.stops.map((s, i) => (
               <button
