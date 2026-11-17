@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FinishRouteImport } from './routes/finish'
+import { Route as TourRouteImport } from './routes/tour'
+import { Route as PartnerPartnerIdRouteImport } from './routes/partner.$partnerId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FinishRoute = FinishRouteImport.update({
+  id: '/finish',
+  path: '/finish',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TourRoute = TourRouteImport.update({
+  id: '/tour',
+  path: '/tour',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerPartnerIdRoute = PartnerPartnerIdRouteImport.update({
+  id: '/partner/$partnerId',
+  path: '/partner/$partnerId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/finish': typeof FinishRoute
+  '/tour': typeof TourRoute
+  '/partner/$partnerId': typeof PartnerPartnerIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/finish': typeof FinishRoute
+  '/tour': typeof TourRoute
+  '/partner/$partnerId': typeof PartnerPartnerIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/finish': typeof FinishRoute
+  '/tour': typeof TourRoute
+  '/partner/$partnerId': typeof PartnerPartnerIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/finish' | '/tour' | '/partner/$partnerId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/finish' | '/tour' | '/partner/$partnerId'
+  id: '__root__' | '/' | '/finish' | '/tour' | '/partner/$partnerId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FinishRoute: typeof FinishRoute
+  TourRoute: typeof TourRoute
+  PartnerPartnerIdRoute: typeof PartnerPartnerIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/finish': {
+      id: '/finish'
+      path: '/finish'
+      fullPath: '/finish'
+      preLoaderRoute: typeof FinishRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tour': {
+      id: '/tour'
+      path: '/tour'
+      fullPath: '/tour'
+      preLoaderRoute: typeof TourRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner/$partnerId': {
+      id: '/partner/$partnerId'
+      path: '/partner/$partnerId'
+      fullPath: '/partner/$partnerId'
+      preLoaderRoute: typeof PartnerPartnerIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FinishRoute: FinishRoute,
+  TourRoute: TourRoute,
+  PartnerPartnerIdRoute: PartnerPartnerIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

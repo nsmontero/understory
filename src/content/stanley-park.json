@@ -1,0 +1,95 @@
+{
+  "id": "stanley-park",
+  "name": { "en": "Stanley Park", "fr": "Parc Stanley" },
+  "tagline": {
+    "en": "A self-guided audio ride along the seawall, from Lost Lagoon to the Hollow Tree.",
+    "fr": "Une balade audio autoguidée le long de la digue, du lagon Lost Lagoon au Hollow Tree."
+  },
+  "colors": {
+    "primary": "#313A1F",
+    "accent": "#D19B3A",
+    "alert": "#D0391F",
+    "surface": "#EDDFD2"
+  },
+  "map": { "center": [49.3035, -123.1360], "zoom": 14 },
+  "triggerRadiusMeters": 40,
+  "rideSpeedKmh": 12,
+  "previewSpeedMetersPerSecond": 140,
+  "route": [
+    [49.2945, -123.1395], [49.2950, -123.1365], [49.2958, -123.1345], [49.2963, -123.1325],
+    [49.2975, -123.1290], [49.2985, -123.1250], [49.2982, -123.1205], [49.2995, -123.1175],
+    [49.3009, -123.1170], [49.3020, -123.1215], [49.3030, -123.1270], [49.3025, -123.1305],
+    [49.3045, -123.1325], [49.3070, -123.1356], [49.3100, -123.1375], [49.3125, -123.1395],
+    [49.3140, -123.1414], [49.3128, -123.1450], [49.3105, -123.1490], [49.3085, -123.1515],
+    [49.3069, -123.1536]
+  ],
+  "partners": [
+    {
+      "id": "train",
+      "label": { "en": "Book the train", "fr": "Réserver le train" },
+      "description": { "en": "Train ticketing will connect here.", "fr": "La billetterie du train sera intégrée ici." }
+    },
+    {
+      "id": "bike",
+      "label": { "en": "Rent a bike", "fr": "Louer un vélo" },
+      "description": { "en": "Bike rental booking will connect here.", "fr": "La location de vélos sera intégrée ici." }
+    }
+  ],
+  "stops": [
+    {
+      "id": "lost-lagoon",
+      "title": { "en": "Lost Lagoon", "fr": "Lost Lagoon" },
+      "coords": [49.2950, -123.1365],
+      "status": "DRAFT, pending historian review",
+      "audio": { "en": "/audio/lost-lagoon-en.mp3", "fr": "/audio/lost-lagoon-fr.mp3" },
+      "script": {
+        "en": "Welcome to the start of your ride. The calm water beside you is Lost Lagoon. Take a moment to look across it, because its name comes from a poem. The poet Pauline Johnson, also known as Tekahionwake, wrote a poem called \"The Lost Lagoon,\" and it dates to 1910. Her words gave this water its name. Twelve years later, in 1922, the Park Board made it official and adopted the name Lost Lagoon. So every time someone says those two words, they are quoting a poet, whether they know it or not. It's a nice thought to carry with you as you ride: that a place can be named not by a survey or a committee, but by the title of a poem. When you're ready, follow the route toward the water's edge. Next, we'll meet the seawall, and the stonemason who spent decades building it by hand.",
+        "fr": "Bienvenue au départ de votre balade. L'eau calme à côté de vous, c'est Lost Lagoon. Prenez un moment pour la regarder, car son nom vient d'un poème. La poète Pauline Johnson, aussi connue sous le nom de Tekahionwake, a écrit un poème intitulé « The Lost Lagoon », qui date de 1910. Ce sont ses mots qui ont donné son nom à ce plan d'eau. Douze ans plus tard, en 1922, la Commission des parcs l'a rendu officiel en adoptant le nom Lost Lagoon. Ainsi, chaque fois que quelqu'un prononce ces deux mots, il cite une poète, qu'il le sache ou non. Voilà une belle idée à emporter pendant votre balade : un lieu peut être nommé non pas par un arpenteur ou un comité, mais par le titre d'un poème. Quand vous êtes prêt, suivez le parcours jusqu'au bord de l'eau. Prochain arrêt : la digue, et le tailleur de pierre qui a passé des décennies à la construire à la main."
+      }
+    },
+    {
+      "id": "seawall",
+      "title": { "en": "The Seawall", "fr": "La digue" },
+      "coords": [49.2963, -123.1325],
+      "status": "DRAFT, pending historian review",
+      "audio": { "en": "/audio/seawall-en.mp3", "fr": "/audio/seawall-fr.mp3" },
+      "script": {
+        "en": "You're now riding on one of the best-loved paths in the city: the Stanley Park seawall. It's easy to take it for granted. It feels as if it has always been here. But it hasn't. Work on the seawall began in 1917, and it wasn't finished until 1971. That's more than fifty years of building. Much of the early work was led by a Scottish stonemason named James Cunningham. He spent decades building sections of this wall by hand, stone by stone. Think about that as your wheels roll along. The wall beside you was set in place slowly, by people, over a lifetime of work. The next time you pass a stretch of carefully fitted stone, you might give a small nod to James Cunningham. Keep the water on your right and ride on. Our next stop is an arch built as a tribute to the logging industry: Lumbermen's Arch.",
+        "fr": "Vous roulez maintenant sur l'un des sentiers les plus appréciés de la ville : la digue du parc Stanley. On la tient facilement pour acquise. On a l'impression qu'elle a toujours été là. Pourtant, non. Les travaux ont commencé en 1917 et ne se sont terminés qu'en 1971. Plus de cinquante ans de construction. Une grande partie des premiers travaux a été dirigée par un tailleur de pierre écossais, James Cunningham. Il a passé des décennies à construire des sections de ce mur à la main, pierre par pierre. Pensez-y pendant que vos roues avancent. Le mur à côté de vous a été posé lentement, par des gens, au fil d'une vie de travail. La prochaine fois que vous passerez devant un tronçon de pierres soigneusement ajustées, vous pourrez saluer discrètement James Cunningham. Gardez l'eau à votre droite et continuez. Prochain arrêt : une arche construite en hommage à l'industrie forestière, la Lumbermen's Arch."
+      }
+    },
+    {
+      "id": "lumbermens-arch",
+      "title": { "en": "Lumbermen's Arch", "fr": "Lumbermen's Arch" },
+      "coords": [49.3025, -123.1305],
+      "status": "DRAFT, pending historian review",
+      "audio": { "en": "/audio/lumbermens-arch-en.mp3", "fr": "/audio/lumbermens-arch-fr.mp3" },
+      "script": {
+        "en": "Up ahead is Lumbermen's Arch. Here's a small puzzle: the arch you can see is not the original. The first Lumbermen's Arch was built in 1912 as a tribute to the logging industry. A year later, in 1913, it was moved here, to the park. It stood for more than three decades, until it was demolished in 1947. For a few years, there was no arch at all. Then, in 1952, the arch you see today was installed. So this one spot has carried the same idea through two different structures: a salute to the people and the industry of logging. As you pass, take a look at it, and imagine the first arch standing here more than a century ago. Two arches, one tribute. From here, the seawall carries you north toward Prospect Point, where a famous ship met its end.",
+        "fr": "Juste devant, voici la Lumbermen's Arch. Petite énigme : l'arche que vous voyez n'est pas l'originale. La première Lumbermen's Arch a été construite en 1912 en hommage à l'industrie forestière. Un an plus tard, en 1913, elle a été déplacée ici, dans le parc. Elle est restée debout plus de trois décennies, jusqu'à sa démolition en 1947. Pendant quelques années, il n'y a plus eu d'arche du tout. Puis, en 1952, l'arche que vous voyez aujourd'hui a été installée. Ce lieu a donc porté la même idée à travers deux structures différentes : un salut aux gens et à l'industrie de l'exploitation forestière. En passant, prenez le temps de la regarder et imaginez la première arche debout ici il y a plus d'un siècle. Deux arches, un seul hommage. D'ici, la digue vous mène vers le nord, jusqu'à Prospect Point, où un célèbre navire a terminé sa course."
+      }
+    },
+    {
+      "id": "ss-beaver",
+      "title": { "en": "S.S. Beaver wreck, Prospect Point", "fr": "Épave du S.S. Beaver, Prospect Point" },
+      "coords": [49.3140, -123.1414],
+      "status": "DRAFT, pending historian review",
+      "audio": { "en": "/audio/ss-beaver-en.mp3", "fr": "/audio/ss-beaver-fr.mp3" },
+      "script": {
+        "en": "You've reached Prospect Point. Look toward the water below. Near here, in 1888, a ship called the S.S. Beaver ran aground. The Beaver holds a remarkable place in history. Launched in 1835, it was the first steamship on the Pacific Northwest coast. It was owned by the Hudson's Bay Company. Imagine it: the very first steam-powered ship working this coastline. More than fifty years after it was launched, its journey ended right here, near Prospect Point. Fifty-three years from launch to wreck. When you look out at the boats crossing the water today, remember that the first steamship on this coast finished its travels within sight of where you're standing. Take a breath, enjoy the view, and when you're ready, ride on. Our final stop is a giant of a different kind: a tree that was already centuries old long before the Beaver was launched.",
+        "fr": "Vous voici à Prospect Point. Regardez l'eau en contrebas. Près d'ici, en 1888, un navire appelé le S.S. Beaver s'est échoué. Le Beaver occupe une place remarquable dans l'histoire. Lancé en 1835, il a été le premier navire à vapeur de la côte nord-ouest du Pacifique. Il appartenait à la Compagnie de la Baie d'Hudson. Imaginez-le : le tout premier navire à vapeur à sillonner cette côte. Plus de cinquante ans après son lancement, son voyage s'est terminé ici même, près de Prospect Point. Cinquante-trois ans entre le lancement et le naufrage. Quand vous regardez les bateaux qui traversent l'eau aujourd'hui, rappelez-vous que le premier navire à vapeur de cette côte a fini sa route à portée de vue de l'endroit où vous vous trouvez. Respirez, profitez de la vue et, quand vous êtes prêt, repartez. Dernier arrêt : un géant d'un autre genre, un arbre qui avait déjà des siècles bien avant le lancement du Beaver."
+      }
+    },
+    {
+      "id": "hollow-tree",
+      "title": { "en": "The Hollow Tree", "fr": "Le Hollow Tree" },
+      "coords": [49.3069, -123.1536],
+      "status": "DRAFT, pending historian review",
+      "audio": { "en": "/audio/hollow-tree-en.mp3", "fr": "/audio/hollow-tree-fr.mp3" },
+      "script": {
+        "en": "This is the Hollow Tree. It's a western red cedar, and it is estimated to be between 700 and 800 years old. Let that number settle for a moment. When this tree began to grow, nothing you've heard about on this ride existed yet. No seawall. No arch. No steamship. No poem. Seven or eight centuries is a very long time for any living thing to stand in one place. As its name tells you, the tree is hollow, and you can see that for yourself. Take your time here. Walk around it, look up, and notice the sheer size of it. Think back over the ride: a poem from 1910, a wall that took more than fifty years to build, two arches, a steamship from 1835. This tree was already old for all of it. That's the end of our tour. Thank you for riding with us through Stanley Park. We hope you'll come back and discover more of its stories.",
+        "fr": "Voici le Hollow Tree, l'arbre creux. C'est un thuya géant, un cèdre rouge de l'Ouest, dont l'âge est estimé entre 700 et 800 ans. Laissez ce chiffre faire son chemin. Quand cet arbre a commencé à pousser, rien de ce que vous avez entendu pendant cette balade n'existait encore. Pas de digue. Pas d'arche. Pas de navire à vapeur. Pas de poème. Sept ou huit siècles, c'est très long pour un être vivant qui reste au même endroit. Comme son nom l'indique, l'arbre est creux, et vous pouvez le constater par vous-même. Prenez votre temps. Faites-en le tour, levez les yeux et mesurez sa taille. Repensez à la balade : un poème de 1910, un mur qui a pris plus de cinquante ans à bâtir, deux arches, un navire à vapeur de 1835. Cet arbre était déjà vieux pour tout cela. C'est la fin de notre visite. Merci d'avoir roulé avec nous dans le parc Stanley. Nous espérons que vous reviendrez découvrir d'autres de ses histoires."
+      }
+    }
+  ]
+}
